@@ -9,7 +9,7 @@ aa <- read.csv("dat1.csv", header = TRUE, sep = ";")
 ab <- read.csv("dat2.csv", header = TRUE, sep = ";")
 ac <- inner_join(aa, ab, by = "Experiment")
 
-b <- melt(ac, id.vars="Experiment") # Umformung sodass 1 Spalte alle Werte enthält
+b <- arrange(melt(ac, id.vars="Experiment"), Experiment) # Umformung sodass 1 Spalte alle Werte enthält
 
 x <- rep(c(1,2,3,4), each = 96) %>% # Kreiert einen Vektor als Index für die Samples, je 96 Datenpunkte
   rep(times = 20) # Die Zahl muss angepasst werden an die Anzahl deiner Zeilen im Datensatz
