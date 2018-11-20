@@ -3,8 +3,13 @@ library(reshape2)
 #library(ggplot2)
 
 # Daten einlesen und umformen
-a <- read.csv("dat.csv", header = TRUE, sep = ";") # Einlesen von meinem Beispieldatensatz, muss ggf. noch auf Excel-Datei angepasst werden
-b <- melt(a, id.vars="Experiment")
+# Einlesen von meinem Beispieldatensatz ist umständlich, eigentlich muss nur 1 Datei eingelesen werden
+# Musst du noch auf Excel-Datei anpassen (das kann ich nicht testen)
+aa <- read.csv("dat1.csv", header = TRUE, sep = ";")
+ab <- read.csv("dat2.csv", header = TRUE, sep = ";")
+ac <- inner_join(aa, ab, by = "Experiment")
+
+b <- melt(ac, id.vars="Experiment") # Umformung sodass 1 Spalte alle Werte enthält
 
 x <- rep(c(1,2,3,4), each = 96) %>% # Kreiert einen Vektor als Index für die Samples, je 96 Datenpunkte
   rep(times = 20) # Die Zahl muss angepasst werden an die Anzahl deiner Zeilen im Datensatz
