@@ -1,6 +1,6 @@
 library(dplyr)
 library(reshape2)
-#library(ggplot2)
+library(ggplot2)
 
 # Daten einlesen und umformen
 # Einlesen von meinem Beispieldatensatz ist umständlich, eigentlich muss nur 1 Datei eingelesen werden
@@ -16,12 +16,12 @@ sample_index <- rep(c(1,2,3,4), each = 96) %>% # Kreiert einen Vektor als Index 
 b <- mutate(b, sample = sample_index) # Fügt dem Datensatz den Sample Index hinzu
 b$sample <- factor(b$sample) # Kategorisches Datenformat macht sich besser beim Plot
 
-y <- seq(1, 381, by = 4) + rep(0:3, each = 96) # Vorbereitung für Plotten der Samples 1-4 nebeneinander
-#b <- mutate(b, plotting_order = y) # Die Reihenfolge in der geplottet wird dem Datensatz hinzufügen ist nicht unbedingt sinnvoll (nur für Verständniszwecke)
+kackvektor <- seq(1, 381, by = 4) + rep(0:3, each = 96) # Vorbereitung für Plotten der Samples 1-4 nebeneinander
+#b <- mutate(b, plotting_order = kackvektor) # Die Reihenfolge in der geplottet wird dem Datensatz hinzufügen ist nicht unbedingt sinnvoll (nur für Verständniszwecke)
 
 # Plotting
 ggplot(filter(b, Experiment == 1)) + # Erstmal nur Experiment 1 (erste Zeile) plotten
-  geom_quasirandom(aes(x = variable[y], y = value[y], color = sample), groupOnX = TRUE) +
+  geom_quasirandom(aes(x = variable[y], y = value[kackvektor], color = sample), groupOnX = TRUE) +
   facet_wrap(~ Experiment) +
   xlab("well no.") +
   ylab("value")
